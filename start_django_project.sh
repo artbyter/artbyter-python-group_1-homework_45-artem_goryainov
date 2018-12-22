@@ -24,7 +24,7 @@ git add .
 git commit -m "Старт проекта"
 
 echo "== Создание приложения webapp =="
-python manage.py startapp webapp
+#python manage.py startapp webapp
 mv templates webapp/templates
 mkdir webapp/static
 mkdir webapp/static/css webapp/static/js
