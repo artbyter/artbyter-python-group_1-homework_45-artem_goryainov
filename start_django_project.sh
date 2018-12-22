@@ -25,7 +25,7 @@ git commit -m "Старт проекта"
 
 echo "== Создание приложения webapp =="
 #python manage.py startapp webapp
-mv templates webapp/templates
+#mv templates webapp/templates
 mkdir webapp/static
 mkdir webapp/static/css webapp/static/js
 sed --in-place="" "s/\(.*\)'django.contrib.staticfiles',/\1'django.contrib.staticfiles',\n\1'webapp',/g" home44/settings.py
