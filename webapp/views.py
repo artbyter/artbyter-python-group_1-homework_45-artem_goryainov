@@ -75,17 +75,6 @@ class OrderCourierUpdateView(UpdateView):
 
 
 
-class OrderRejectViewV2(DeleteView):
-    model = OrderUpdateView
-    template_name = 'order_cancel.html'
-
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        # поменять статус на canceled
-        # сохранить заказ
-        return HttpResponseRedirect(success_url)
-
 
 # Представления для создания заказа
 class OrderCreateView(CreateView):
