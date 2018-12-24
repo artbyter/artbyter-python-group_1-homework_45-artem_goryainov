@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Изменить заказ{% endblock %}
+
+{% block content %}
+
+    {% if order.status == 'delivered' or order.status == 'on_way' %}
+        <h2>Заказ уже доставляется или доставлен</h2>
+    {% else %}
+        <form action="{% url 'order_update' order.pk %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <table>
+                <thead>
+                <tr>
+
+                    <th>Блюдо</th>
+                    <th>Количество</th>
+                    <th>Удалить</th>
+                </tr>
+                </thead>
+                {% for order_food in order.foods.all %}
+                    <tr>
+                    <td>{{ order_food.food.name }}</td>
+                    <td>{{ order_food.amount }}</td>
+                    <td><a href="{% url 'order_food_delete'  order_food.pk %}"><i
+                            class="fas fa-user-times"></i></a></td>
+                {% endfor %}
+            </table>
+            <br>
+
+            {% if courier %}{% else %}<a href="{% url 'order_food_create' order.pk %}">Добавить блюда</a>{% endif %}
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    {% endif %}
+{% endblock %}

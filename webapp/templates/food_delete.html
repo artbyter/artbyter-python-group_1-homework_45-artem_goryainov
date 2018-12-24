@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Удалить блюдо{% endblock title %}
+
+{% block content %}
+
+        <form action="{% url "food_delete" food.pk %}" method="post">
+            {% csrf_token %}
+
+                <h2>Вы действительно хотите удалить блюдо {{ food.name }}?</h2>
+
+                <div  >
+                    <label  for="yes">Да</label>
+                    <input  type="radio" id="yes" value="yes" name="delete">
+                    <label  for="no">Нет</label>
+                    <input  type="radio" id="no" value="no" name="delete" checked>
+                    <input type="submit" value="Подтвердить"/>
+                </div>
+                <br>
+
+        </form>
+
+{% endblock content %}
