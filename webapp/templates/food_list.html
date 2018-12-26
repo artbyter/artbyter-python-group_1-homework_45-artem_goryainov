@@ -6,7 +6,7 @@
 {% block content %}
     <table>
         <h3>Список блюд</h3>
-        <a href="{% url 'food_create' %}">Добавить блюдо</a>
+        <a href="{% url 'webapp:food_create' %}">Добавить блюдо</a>
         <thead>
         <tr>
 
@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ food.name }}</td>
                 <td>{{ food.price }}</td>
-                <td><a href="{% url 'food_detail'  food.pk %}">📜</td>
+                <td><a href="{% url 'webapp:food_detail'  food.pk %}">📜</td>
             </tr>
             </tr>
         {% endfor %}

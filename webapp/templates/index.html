@@ -6,7 +6,7 @@
 {% block content %}
     <table>
         <h3>Список заказов</h3>
-    <a href="{% url 'order_create' %}">Создать заказ</a>
+    <a href="{% url 'webapp:order_create' %}">Создать заказ</a>
         <thead>
         <tr>
 
@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ order.pk }}</td>
 
-                <td><a href="{% url 'order_detail'  order.pk %}">📜</td>
+                <td><a href="{% url 'webapp:order_detail'  order.pk %}">📜</td>
             </tr>
             </tr>
         {% endfor %}

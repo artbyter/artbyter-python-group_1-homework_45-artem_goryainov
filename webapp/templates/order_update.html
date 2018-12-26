@@ -24,13 +24,13 @@
                     <tr>
                     <td>{{ order_food.food.name }}</td>
                     <td>{{ order_food.amount }}</td>
-                    <td><a href="{% url 'order_food_delete'  order_food.pk %}"><i
+                    <td><a href="{% url 'webapp:order_food_delete'  order_food.pk %}"><i
                             class="fas fa-user-times"></i></a></td>
                 {% endfor %}
             </table>
             <br>
 
-            {% if courier %}{% else %}<a href="{% url 'order_food_create' order.pk %}">Добавить блюда</a>{% endif %}
+            {% if courier %}{% else %}<a href="{% url 'webapp:order_food_create' order.pk %}">Добавить блюда</a>{% endif %}
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
     {% endif %}

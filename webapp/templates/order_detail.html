@@ -2,8 +2,8 @@
 {% block title %}Заказ{% endblock %}
 {% block content %}
     <h3>Заказ №{{ order.pk }}</h3>
-    <a href="{% url 'order_update' order.pk %}">Изменить заказ (для оператора)</a><br>
-    <a href="{% url 'order_courier_update' order.pk %}">Изменить заказ (для курьера)</a><br><br>
+    <a href="{% url 'webapp:order_update' order.pk %}">Изменить заказ (для оператора)</a><br>
+    <a href="{% url 'webapp:order_courier_update' order.pk %}">Изменить заказ (для курьера)</a><br><br>
     <h5>Данные заказа:</h5>
     <p>Контактный телефон: {{ order.contact_phone }}</p>
     <p>Имя:  {{ order.contact_name }}</p>
