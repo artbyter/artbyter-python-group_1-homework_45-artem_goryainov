@@ -7,7 +7,7 @@
         {% csrf_token %}
         {{ formset.media }}
         {{ form.as_p }}
-
+        {{ request.messages }}
         {% for form in formset %}
             <hr>
             <div class="ml-5">

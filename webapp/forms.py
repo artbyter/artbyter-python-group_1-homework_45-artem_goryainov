@@ -9,20 +9,28 @@ class FoodForm(forms.ModelForm):
 
 
 class OrderForm(forms.ModelForm):
-    class Meta:
-        model = Order
-        exclude = []
-
-
-class OrderCourierForm(forms.ModelForm):
-    class Meta:
-        model = Order
-        fields = ['status', 'courier']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['status'].choices = [('on_way', 'В пути'),
-                                         ('delivered', 'Доставлен'), ]
+        self.fields['status'].choices = [Order.STATUS_CHOICES[Order.STATUS_NEW],
+                                         Order.STATUS_CHOICES[Order.STATUS_PREPARING],
+                                         Order.STATUS_CHOICES[Order.STATUS_CANCELED], ]
+
+    class Meta:
+        model = Order
+        exclude = ['courier', 'operator']
+
+
+class OrderCourierForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['status'].choices = [Order.STATUS_CHOICES[Order.STATUS_DELIVERED],
+                                         Order.STATUS_CHOICES[Order.STATUS_ON_WAY] ]
+
+    class Meta:
+        model = Order
+        fields = ['status', 'courier']
 
 
 class OrderFoodForm(forms.ModelForm):

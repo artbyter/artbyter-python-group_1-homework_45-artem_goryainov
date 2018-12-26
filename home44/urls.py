@@ -14,26 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from webapp.views import FoodDetailView, OrderDetailView, OrderCreateView, FoodCreateView, OrderUpdateView, \
-    OrderFoodCreateView, FoodUpdateView, FoodDeleteView, OrderFoodDeleteView, OrdersListView, FoodListView,OrderCourierUpdateView
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', OrdersListView.as_view(), name='orders_list'),
-    path('food/', FoodListView.as_view(), name='food_list'),
-    path('food/<int:pk>', FoodDetailView.as_view(), name='food_detail'),
-    path('food/create', FoodCreateView.as_view(), name='food_create'),
-    path('food/<int:pk>/edit', FoodUpdateView.as_view(), name='food_edit'),
-    path('food/<int:pk>/delete', FoodDeleteView.as_view(), name='food_delete'),
-    path('order/<int:pk>', OrderDetailView.as_view(), name='order_detail'),
-    path('order/create', OrderCreateView.as_view(), name='order_create'),
-    path('order/<int:pk>/update', OrderUpdateView.as_view(), name='order_update'),
-    path('order/<int:pk>/courier_update', OrderCourierUpdateView.as_view(), name='order_courier_update'),
-    path('order/<int:pk>/food/create', OrderFoodCreateView.as_view(), name='order_food_create'),
-    path('order/<int:pk>/food/delete', OrderFoodDeleteView.as_view(), name='order_food_delete'),
+    path('auth/', include('webauth.urls')),
+    path('', include('webapp.urls')),
+
 ]
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

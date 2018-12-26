@@ -10,27 +10,45 @@
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     {% block styles %}{% endblock %}
 </head>
 <body>
 
 {% block menu %}
     <nav class="navbar navbar-expand-sm navbar-light bg-light mb-5">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse  pl-0" id="navbarNavAltMarkup">
-            <div class="navbar-nav ">
-                <a class=" pl-0 nav-item nav-link active" href="{% url 'webapp:orders_list' %}">Список заказов </a>
-                <a class="nav-item nav-link active" href="{% url 'webapp:food_list' %}">Список блюд</a>
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse  pl-0" id="navbarNavAltMarkup">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="  nav-link " href="
+                                {% if perms.webapp.is_operator %}{% url 'webapp:orders_list' %}
+                                {% elif perms.webapp.is_courier %}{% url 'webapp:orders_courier_list' %}
+                                {% endif %}">Список заказов </a>
+                    </li>
+                    {% if perms.webapp.is_operator %}
+                        <li class="nav-item active">
+                            <a class="nav-link " href="{% url 'webapp:food_list' %}">Список блюд</a>
+                        </li>
+                    {% endif %}
 
+                </ul>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item active">
+                            <p class=" nav-link  text-secondary "> Добро пожаловать, {{ user.username }}</p>
 
+                        </li>
+                        <a class="  nav-link " href="{% url 'webauth:logout' %}">Выйти</a>
+                    {% endif %}
+                </ul>
             </div>
         </div>
-    </div>
     </nav>
 {% endblock menu %}
 <div class="container">
