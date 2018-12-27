@@ -59,7 +59,7 @@ class FoodDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 class OrdersListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Order
     template_name = 'index.html'
-    permission_required = 'webapp.view_order'
+    permission_required = 'webapp.is_operator'
 
 
 class OrdersCourierListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -76,11 +76,6 @@ class OrderDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Order
     template_name = 'order_detail.html'
     permission_required = 'webapp.view_order'
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['link'] = 'Взять заказ' if self.object.status == Order.STATUS_PREPARING else 'Завершить заказ'
-    #     return context
 
 
 class OrderUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):

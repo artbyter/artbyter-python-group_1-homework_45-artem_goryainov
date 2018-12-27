@@ -5,20 +5,19 @@
 
 {% block content %}
 
-        <form action="{% url "webapp:food_delete" food.pk %}" method="post">
-            {% csrf_token %}
+    <form action="{% url "webapp:food_delete" food.pk %}" method="post">
+        {% csrf_token %}
 
-                <h2>Вы действительно хотите удалить блюдо {{ food.name }}?</h2>
+        <h2>Вы действительно хотите удалить блюдо {{ food.name }}?</h2>
 
-                <div  >
-                    <label  for="yes">Да</label>
-                    <input  type="radio" id="yes" value="yes" name="delete">
-                    <label  for="no">Нет</label>
-                    <input  type="radio" id="no" value="no" name="delete" checked>
-                    <input type="submit" value="Подтвердить"/>
-                </div>
-                <br>
+        <div>
+            <input class="btn btn-link"
+                   type="button" value="Отменить"
+                   onclick="window.history.go(-1);"/>
+            <input class="btn btn-link" type="submit" value="Подтвердить"/>
+        </div>
+        <br>
 
-        </form>
+    </form>
 
 {% endblock content %}
